@@ -1,4 +1,4 @@
-module hydroponic-system
+module github.com/angerhard/go-eventbus
 
 go 1.22
 
