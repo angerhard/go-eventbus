@@ -8,7 +8,7 @@ import (
 	"net/url"
 )
 
-func initBus(ctx context.Context, mqttHost, topic, clientId string, f func(pr paho.PublishReceived) (bool, error)) (*autopaho.ConnectionManager, error) {
+func InitBus(ctx context.Context, mqttHost, topic, clientId string, f func(pr paho.PublishReceived) (bool, error)) (*autopaho.ConnectionManager, error) {
 	u, err := url.Parse(mqttHost)
 	if err != nil {
 		log.Fatalf("URL parsing failed: %v", err)
@@ -48,7 +48,7 @@ func initBus(ctx context.Context, mqttHost, topic, clientId string, f func(pr pa
 	return c, nil
 }
 
-func publish(ctx context.Context, topic, message string, c *autopaho.ConnectionManager) {
+func Publish(ctx context.Context, topic, message string, c *autopaho.ConnectionManager) {
 	if _, err := c.Publish(ctx, &paho.Publish{QoS: 1, Topic: topic, Payload: []byte(message)}); err != nil && ctx.Err() == nil {
 		log.Fatalf("Publish failed: %v", err)
 	}
